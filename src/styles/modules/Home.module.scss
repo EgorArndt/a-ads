@@ -1,0 +1,126 @@
+@import "../typography";
+@import "../functions";
+@import "../breakpoints";
+
+$btn-bg: #fae15c;
+$btn-contrast-text: #697e4d;
+$btn-shadow: 0 4px 2px -2px #fe9e3e;
+
+$header-height: 100px;
+$content-spacing: 2rem;
+$site-width: 1000px;
+
+%center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  @extend %center;
+  background: transparent;
+  width: 100%;
+  height: $header-height;
+  padding: $content-spacing;
+  z-index: 1;
+  position: relative;
+
+  .container {
+    @extend %center;
+    justify-content: space-between;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: $site-width;
+}
+
+.btn {
+  font-size: $body1;
+  background-color: $btn-bg;
+  color: $btn-contrast-text;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 0.7rem 3rem;
+  border-radius: 15px;
+  -moz-box-shadow: $btn-shadow;
+  -webkit-box-shadow: $btn-shadow;
+  box-shadow: $btn-shadow;
+}
+
+.main {
+  @extend %center;
+  flex-direction: column;
+
+  .section {
+    width: 100%;
+    padding: $content-spacing;
+    @extend %center;
+
+    &:first-child {
+      background-color: #5c9aff;
+      color: set-contrast-text(#5c9aff);
+      margin-top: -$header-height;
+      padding-top: $header-height;
+      z-index: 0;
+      position: relative;
+
+      .container {
+        flex-direction: column;
+        gap: 3rem;
+      }
+    }
+
+    &:nth-child(2) {
+      background-color: $bg-white;
+      color: set-contrast-text($bg-white);
+
+      .container {
+        @extend %center;
+        gap: 1rem;
+        font-size: $body1;
+      }
+    }
+
+    &:nth-child(3) {
+      background-color: $bg-black;
+      color: set-contrast-text($bg-black);
+
+      .container {
+        @extend %center;
+        gap: 1.5rem;
+        font-size: $body1;
+        justify-content: space-between;
+        @media (max-width: $s) {
+          & {
+            flex-direction: column;
+            align-items: flex-start;
+          }
+        }
+
+        & > div {
+          .currency {
+            font-size: $body2;
+            font-weight: 600;
+            color: $yellow;
+            display: flex;
+            gap: 0.5rem;
+          }
+          &:first-child .currency {
+            color: $green;
+            &:before {
+              content: "$";
+            }
+          }
+          &:nth-child(2) .currency:before {
+            content: "₽";
+          }
+          &:last-child .currency:before {
+            content: "€";
+          }
+        }
+      }
+    }
+  }
+}

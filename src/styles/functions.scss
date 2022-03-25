@@ -1,0 +1,16 @@
+@import "contrastText";
+@import "bgs";
+
+@function set-contrast-text($bg) {
+  @if $bg == $bg-white {
+    @return $black;
+  }
+  @if $bg == $bg-black {
+    @return $grey;
+  }
+  @if lightness($bg) > 80 {
+    @return $black;
+  } @else {
+    @return $white;
+  }
+}
