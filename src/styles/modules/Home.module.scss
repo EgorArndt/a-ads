@@ -80,6 +80,12 @@ $site-width: 1000px;
         @extend %center;
         gap: 1rem;
         font-size: $body1;
+
+        @media (max-width: $s) {
+          & {
+            flex-direction: column;
+          }
+        }
       }
     }
 
@@ -96,6 +102,9 @@ $site-width: 1000px;
           & {
             flex-direction: column;
             align-items: flex-start;
+          }
+          & > * {
+            width: 100%;
           }
         }
 
