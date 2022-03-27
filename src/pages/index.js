@@ -5,10 +5,12 @@ import { isEmpty } from 'lodash-es'
 
 import { Google } from '../components/icons'
 import { fetcher, financial } from '../utils'
-import { blockchainApi } from '../constants/api'
+import { blockchainApi, apiKeys } from '../constants/api'
 import { stubbyTxt } from '../constants/stubbyTxt'
 import styles from '../styles/modules/Home.module.scss'
 
+// Some heavy Header
+// For more complex layouts a .getLayout pattern can be introduced
 const Header = memo(() => 
   <header className={styles.header}>
     <div className={styles.container}>
@@ -17,15 +19,16 @@ const Header = memo(() =>
     </div>
   </header>)
 
-const Section = memo(({ children }) => 
-  (<section className={styles.section}>
+// Some heavy Section
+const Section = memo(({ children }) => (
+  <section className={styles.section}>
     <div className={styles.container}>
       {children}
     </div>
-  </section>)   
-, (p) => !p.children.some(child => child.key === 'USD'))
+  </section>
+), (p) => !p.children.some(child => child.key === apiKeys.usd))
 
-export default function Home() {
+const Home = () => {
   const [currency, setCurrency] = useState({})
   const { data } = useSWR(blockchainApi, fetcher, {refreshInterval: 60000})
   
@@ -55,13 +58,13 @@ export default function Home() {
         </Section>
         <Section>
           {[
-            {title: "Hello, World", key: "USD", txt: "I am safer than ruble"},
-            {title: "Привет, мир", key: "RUB", txt: "Я обречен"},
-            {title: "Hallo, Welt", key: "EUR", txt: "Ich bin sicherer als Rubel"},
+            {title: "Hello, World", key: apiKeys.usd, txt: "I am safer than ruble"},
+            {title: "Привет, мир", key: apiKeys.rub, txt: "Я обречен"},
+            {title: "Hallo, Welt", key: apiKeys.eur, txt: "Ich bin sicherer als Rubel"},
           ].map(({title, key, txt}) => 
             <div key={key}>
               <p>{title}</p>
-              <span className={!isEmpty(currency) && styles.currency}>
+              <span className={!isEmpty(currency) ? styles.currency : ''}>
                 {isEmpty(currency) ? 'Loading...' : financial(currency[key])}
               </span>
               <p>{txt}</p>
@@ -72,3 +75,5 @@ export default function Home() {
     </>
   )
 }
+
+export default Home

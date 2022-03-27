@@ -52,8 +52,14 @@ $site-width: 1000px;
 .main {
   @extend %center;
   flex-direction: column;
+  height: calc(100vh - $header-height);
+
+  @media (max-width: $s) {
+    height: auto;
+  }
 
   .section {
+    height: 100%;
     width: 100%;
     padding: $content-spacing;
     @extend %center;
@@ -89,9 +95,10 @@ $site-width: 1000px;
       }
     }
 
-    &:nth-child(3) {
+    &:last-child {
       background-color: $bg-black;
       color: set-contrast-text($bg-black);
+      margin-top: auto;
 
       .container {
         @extend %center;
