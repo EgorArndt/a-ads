@@ -10,7 +10,7 @@ import { stubbyTxt } from '../constants/stubbyTxt'
 import styles from '../styles/modules/Home.module.scss'
 
 // Some heavy Header
-// For more complex layouts a .getLayout pattern can be introduced
+// For more complex layouts the getLayout pattern can be introduced
 const Header = memo(() => 
   <header className={styles.header}>
     <div className={styles.container}>
